@@ -19,13 +19,11 @@ sayHello friendsName =
 
 formatPhoneNumber : String -> String -> String -> String
 formatPhoneNumber areaCode exchange local =
-    -- desired format: (999) 999-9999
     "(" ++ areaCode ++ ") " ++ exchange ++ "-" ++ local
 
 
 initials : String -> String -> String
 initials firstName lastName =
-    -- HINT: look at http://package.elm-lang.org/packages/elm/core/latest/String for useful functions
     String.left 1 firstName ++ String.left 1 lastName
 
 
@@ -37,7 +35,6 @@ initials firstName lastName =
 
 isGreaterThanTen : Int -> Bool
 isGreaterThanTen x =
-    -- TODO: implement me
     x > 10
 
 
@@ -61,15 +58,12 @@ howHotIsThePepper heatUnits =
 
 reverseTheList : List a -> List a
 reverseTheList inputList =
-    -- TODO: return the reversed inputList
-    -- HINT: look at http://package.elm-lang.org/packages/elm/core/latest/List for useful functions
     List.reverse inputList
 
 
 addOneTo x = x + 1
 addOne : List Int -> List Int
 addOne inputList =
-    -- TODO: add one to every item in the list
     List.map addOneTo inputList
 
 
@@ -81,7 +75,6 @@ oTest name =
 
 removeOs : List String -> List String
 removeOs inputList =
-    -- TODO: remove all entries that start with "O"
     List.filter oTest inputList
 
 
@@ -97,19 +90,16 @@ type alias Person =
 
 newborn : String -> { name : String, age : Int }
 newborn name =
-    -- TODO: fix me
     Person name 0
 
 
 ageDifference : { name : String, age : Int } -> { name : String, age : Int } -> Int
 ageDifference person1 person2 =
-    -- TODO: fix me
     abs (person1.age - person2.age)
 
 
 nameChange : String -> { name : String, age : Int } -> { name : String, age : Int }
 nameChange newName person =
-    -- TODO: fix me
     { person | name = newName }
 
 

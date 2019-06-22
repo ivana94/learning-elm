@@ -105,14 +105,12 @@ nameChange newName person =
 
 getOlder : { name : String, age : Int } -> { name : String, age : Int }
 getOlder person =
-    -- TODO: fix me
-    { person | age = age + 1 }
+    { person | age = person.age + 1 }
 
 
 combinedYears : List { name : String, age : Int } -> Int
 combinedYears people =
-    -- TODO: fix me
-    0
+    List.foldl (\r a -> r.age + a) 0 people
 
 
 
@@ -126,8 +124,10 @@ combinedYears people =
 
 signAndMagnitude : Int -> ( String, Int )
 signAndMagnitude x =
-    -- TODO: implement me
-    ( "TODO", 0 )
+    if x == abs x then
+        ( "+", x )
+    else
+        ("-", abs x)
 
 
 
@@ -142,7 +142,7 @@ pigLatin word =
     -- and put it at the end of the word, followed by an "ay" sound.
     -- Pig latin, in pig latin, is "Ig-pay atin-lay"
     -- For this exercise, just worry about producing a single word in pig latin.
-    "TODO: implement me"
+    String.slice 1 (String.length word) word ++ "-" ++ String.toLower (String.left 1 word ++ "ay")
 
 
 

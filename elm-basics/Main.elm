@@ -14,19 +14,19 @@ import String
 
 sayHello : String -> String
 sayHello friendsName =
-    "TODO: implement me"
+    "Hello, " ++ friendsName
 
 
 formatPhoneNumber : String -> String -> String -> String
 formatPhoneNumber areaCode exchange local =
     -- desired format: (999) 999-9999
-    "TODO: implement me"
+    "(" ++ areaCode ++ ") " ++ exchange ++ "-" ++ local
 
 
 initials : String -> String -> String
 initials firstName lastName =
     -- HINT: look at http://package.elm-lang.org/packages/elm/core/latest/String for useful functions
-    "TODO: implement me"
+    String.left 1 firstName ++ String.left 1 lastName
 
 
 
@@ -38,12 +38,19 @@ initials firstName lastName =
 isGreaterThanTen : Int -> Bool
 isGreaterThanTen x =
     -- TODO: implement me
-    False
+    x > 10
 
 
 howHotIsThePepper : Float -> String
 howHotIsThePepper heatUnits =
-    "TODO: implement me"
+    if heatUnits == 2 then
+        "not hot"
+    else if heatUnits == 100 then
+        "mild"
+    else if heatUnits == 3000 then
+        "medium"
+    else
+        "hot"
 
 
 
@@ -56,19 +63,26 @@ reverseTheList : List a -> List a
 reverseTheList inputList =
     -- TODO: return the reversed inputList
     -- HINT: look at http://package.elm-lang.org/packages/elm/core/latest/List for useful functions
-    []
+    List.reverse inputList
 
 
+addOneTo x = x + 1
 addOne : List Int -> List Int
 addOne inputList =
     -- TODO: add one to every item in the list
-    []
+    List.map addOneTo inputList
 
+
+oTest name =
+    if String.left 1 name /= "O" then
+        True
+    else
+        False
 
 removeOs : List String -> List String
 removeOs inputList =
     -- TODO: remove all entries that start with "O"
-    []
+    List.filter oTest inputList
 
 
 
@@ -84,25 +98,25 @@ type alias Person =
 newborn : String -> { name : String, age : Int }
 newborn name =
     -- TODO: fix me
-    { name = "", age = -1 }
+    Person name 0
 
 
 ageDifference : { name : String, age : Int } -> { name : String, age : Int } -> Int
 ageDifference person1 person2 =
     -- TODO: fix me
-    0
+    abs (person1.age - person2.age)
 
 
 nameChange : String -> { name : String, age : Int } -> { name : String, age : Int }
 nameChange newName person =
     -- TODO: fix me
-    person
+    { person | name = newName }
 
 
 getOlder : { name : String, age : Int } -> { name : String, age : Int }
 getOlder person =
     -- TODO: fix me
-    person
+    { person | age = age + 1 }
 
 
 combinedYears : List { name : String, age : Int } -> Int

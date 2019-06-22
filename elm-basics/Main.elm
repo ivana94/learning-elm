@@ -67,15 +67,9 @@ addOne inputList =
     List.map addOneTo inputList
 
 
-oTest name =
-    if String.left 1 name /= "O" then
-        True
-    else
-        False
-
 removeOs : List String -> List String
 removeOs inputList =
-    List.filter oTest inputList
+    List.filter (String.startsWith "O" >> not) inputList
 
 
 

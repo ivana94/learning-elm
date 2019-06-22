@@ -1,6 +1,10 @@
 # elm
 
-Elm: purely functional
+[I followed the tutorial here!](https://elmbridge.github.io/curriculum/)
+
+
+
+**Elm**: purely functional
 data types: INT, FLOAT, LIST NUM, LIST STRING, STRING, BOOL, CHAR, DICT
 everything in a list must be of the same data type
 
@@ -83,4 +87,129 @@ Functions have types too. Functions will show something like `Int -> String -> F
 ```elm
 multiplyByThree x = x * 3 -- <function> : number -> number
 ```
+
+
+
+
+
+
+
+## The Development Environment
+
+Elm code must be compiled into JS. Browsers can't understand Elm, therefore it must be compiled into JS.
+
+`elm reactor` is a useful command that starts a local dev server. 
+
+The `main` function describes the initialization logic for the application. 
+
+```elm
+main =
+    Browser.sandbox
+        { init = init
+        , view = view
+        , update = update
+        }
+```
+
+It requires 3 basic pieces of information:
+
+- `model` 
+  - describes the state of our application
+  - the app will create new model values as the user interacts with the app 
+- `view`
+  - converts the model into HTML
+  - maps all possible user actions to `messages` 
+- `update` 
+  - responsible for updating the app's state based on triggered `messages` 
+  - consumes the current app state (`model`) and a single `message`. Then it returns a new `model` that describes the app's new state. 
+  - sounds like Redux
+
+So `model`, `view`, and `update` form the triforce of Elm.
+
+
+
+
+
+### model.
+
+```elm
+type alias Model =
+    { buttonLabel : String }
+
+
+init : Model
+init =
+    { buttonLabel = "hello world!" }
+```
+
+The init function returns a record, which is a key-value pair. This particular record represents the state or `model` of our application. In this case our app only has 1 state property — `buttonLabel` whose value is `"hello world!"` 
+
+It is convention to write a **type alias** to describe your application's state, and call it `Model`, like this:
+
+```elm
+type alias Model =
+    { buttonLabel : String }
+```
+
+We use type aliases for convenience.
+
+The model is passed as arguments to the view and update functions. We don't directly change the model. Instead we pass a different argument to the view and update functions. 
+
+
+
+
+
+### view.
+
+The view is responsible for converting our `model` into HTML. Any changes between HTML that was just generated and the HTML currently onscreen will be generated to the UI by Elm. Like front-end frameworks Elm has its own way of describing UI. Here's how Elm would describe some UI:
+
+```elm
+view model =
+    Html.div
+        [ Html.Attributes.class "skeleton-elm-project" ]
+        [ Html.node "link"
+            [ Html.Attributes.rel "stylesheet"
+            , Html.Attributes.href "stylesheets/main.css"
+            ]
+            []
+        , Html.div
+            [ Html.Attributes.class "waves-effect waves-light btn-large"
+            , Html.Events.onClick ChangeText
+            ]
+            [ Html.text model.buttonLabel ]
+        ]
+```
+
+This would compile to:
+
+```html
+<div class="skeleton-elm-project">
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <div class="waves-effect waves-light btn-large">
+    hello world!
+  </div>
+</div>	
+```
+
+
+
+
+
+### update.
+
+When a message, or action, is triggered by the UI, update will take two arguments: the message and the current model, and it returns a new model. The view function receives this new model and updates the UI.
+
+```elm
+update msg model =
+    case msg of
+        ChangeText ->
+            if model.buttonLabel == "hello world!" then
+                { model | buttonLabel = "goodbye world!" }
+            else
+                { model | buttonLabel = "hello world!" }
+```
+
+
+
+
 
